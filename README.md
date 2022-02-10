@@ -1,18 +1,18 @@
-# Salesforce DX Project: Next Steps
+# Stuff to do I guess
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
-
-## How Do You Plan to Deploy Your Changes?
-
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
-
-## Configure Your Salesforce DX Project
-
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
-
-## Read All About It
-
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+1. remember how I intended for this to work
+2. upgrade from aura to lwc
+3. refactor - maybe try leveraging some packages?
+4. update from process builder to flow
+5. try out automated testing framework(s)
+6. make it easier to add/remove users
+7. data model enhancements
+    a. make 'restaurant' data less vague
+        i. maybe there's an api out there with restaurant data
+    b. is there any other information that users would like to know?
+8. decider enhancements
+    a. make it easier to select users
+    b. figure out a layout that looks...not terrible
+    c. redo 'suggestion's - additive, rather than either/or
+    d. update filtering (match data model enhancement)
+9. maybe google maps integration if it's free
