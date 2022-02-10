@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Kyle Blair</fullName>
+        <default>false</default>
+        <label>Kyle Blair</label>
+    </customValue>
+    <customValue>
+        <fullName>Kyle Chiu</fullName>
+        <default>false</default>
+        <label>Kyle Chiu</label>
+    </customValue>
+    <customValue>
+        <fullName>Spencer Grande</fullName>
+        <default>false</default>
+        <label>Spencer Grande</label>
+    </customValue>
+    <customValue>
+        <fullName>Wesley Springer</fullName>
+        <default>false</default>
+        <label>Wesley Springer</label>
+    </customValue>
+    <customValue>
+        <fullName>Cody Zeitler</fullName>
+        <default>false</default>
+        <label>Cody Zeitler</label>
+    </customValue>
+    <customValue>
+        <fullName>Timothy Cook</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Timothy Cook</label>
+    </customValue>
+    <customValue>
+        <fullName>Robert Kasprzyk</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Robert Kasprzyk</label>
+    </customValue>
+    <masterLabel>People</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>
