@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>49.0</apiVersion>
     <decisions>
@@ -21,10 +21,12 @@
                 </rightValue>
             </conditions>
             <conditions>
-                <leftValueReference>myVariable_old.Last_Visited_Date__c</leftValueReference>
+                <leftValueReference
+        >myVariable_old.Last_Visited_Date__c</leftValueReference>
                 <operator>NotEqualTo</operator>
                 <rightValue>
-                    <elementReference>myVariable_current.Last_Visited_Date__c</elementReference>
+                    <elementReference
+          >myVariable_current.Last_Visited_Date__c</elementReference>
                 </rightValue>
             </conditions>
             <connector>
@@ -73,10 +75,12 @@
                         <stringValue>Formula</stringValue>
                     </value>
                 </processMetadataValues>
-                <leftValueReference>myVariable_current.Last_Visited_Date__c</leftValueReference>
+                <leftValueReference
+        >myVariable_current.Last_Visited_Date__c</leftValueReference>
                 <operator>LessThan</operator>
                 <rightValue>
-                    <elementReference>formula_2_myRule_1_5672000984</elementReference>
+                    <elementReference
+          >formula_2_myRule_1_5672000984</elementReference>
                 </rightValue>
             </conditions>
             <conditions>
@@ -104,7 +108,8 @@
                         <stringValue>Boolean</stringValue>
                     </value>
                 </processMetadataValues>
-                <leftValueReference>isChangedRule_3_myRule_1_Last_Visited_Date_c</leftValueReference>
+                <leftValueReference
+        >isChangedRule_3_myRule_1_Last_Visited_Date_c</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
                     <booleanValue>true</booleanValue>
@@ -135,7 +140,8 @@
                         <stringValue>GlobalConstant</stringValue>
                     </value>
                 </processMetadataValues>
-                <leftValueReference>myVariable_current.Last_Visited_Date__c</leftValueReference>
+                <leftValueReference
+        >myVariable_current.Last_Visited_Date__c</leftValueReference>
                 <operator>NotEqualTo</operator>
             </conditions>
             <connector>
@@ -144,7 +150,8 @@
             <label>Restaurant visit date is updated in the past</label>
         </rules>
     </decisions>
-    <description>Add an event to the Restaurant Calendar when we visit a restaurant</description>
+    <description
+  >Add an event to the Restaurant Calendar when we visit a restaurant</description>
     <formulas>
         <processMetadataValues>
             <name>originalFormula</name>
@@ -156,7 +163,8 @@
         <dataType>Date</dataType>
         <expression>TODAY()</expression>
     </formulas>
-    <interviewLabel>Update_Restaurant_Calendar-13_InterviewLabel</interviewLabel>
+    <interviewLabel
+  >Update_Restaurant_Calendar-13_InterviewLabel</interviewLabel>
     <label>Update Restaurant Calendar</label>
     <processMetadataValues>
         <name>ObjectType</name>
@@ -210,7 +218,7 @@
             <processMetadataValues>
                 <name>leftHandSideReferenceTo</name>
                 <value>
-                    <stringValue></stringValue>
+                    <stringValue />
                 </value>
             </processMetadataValues>
             <processMetadataValues>
@@ -281,7 +289,8 @@
             </processMetadataValues>
             <field>StartDateTime</field>
             <value>
-                <elementReference>myVariable_current.Last_Visited_Date__c</elementReference>
+                <elementReference
+        >myVariable_current.Last_Visited_Date__c</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -306,7 +315,7 @@
             <processMetadataValues>
                 <name>leftHandSideReferenceTo</name>
                 <value>
-                    <stringValue></stringValue>
+                    <stringValue />
                 </value>
             </processMetadataValues>
             <processMetadataValues>
@@ -322,7 +331,8 @@
         </inputAssignments>
         <object>Event</object>
     </recordCreates>
-    <startElementReference>isChangedDecision3_myRule_1_Last_Visited_Date_c</startElementReference>
+    <startElementReference
+  >isChangedDecision3_myRule_1_Last_Visited_Date_c</startElementReference>
     <status>Active</status>
     <variables>
         <name>myVariable_current</name>

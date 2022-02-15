@@ -1,22 +1,27 @@
-<aura:component description="LunchPicker2" controller="LunchPickerController"
-                implements="force:hasRecordId,force:hasSObjectName,flexipage:availableForAllPageTypes">
+<aura:component
+	description="LunchPicker2"
+	controller="LunchPickerController"
+	implements="force:hasRecordId,force:hasSObjectName,flexipage:availableForAllPageTypes"
+>
+	<aura:attribute name="restaurant" type="Object" />
+	<!--<aura:attribute name="restaurants" type="List"/>-->
 
-    <aura:attribute name="restaurant" type="Object"/>
-    <!--<aura:attribute name="restaurants" type="List"/>-->
+	<aura:handler name="init" value="{!this}" action="{!c.init}" />
 
-    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
-
-    <lightning:card title="Lunch Picker"/>
-    <lightning:buttonGroup>
-        <lightning:button onclick="{!resetRestaurants}" value="Reset Restaurant Selection"/>
-        <lightning:button onclick="{!resetDiners}" value="Reset Diners"/>
-        <lightning:button onclick="{!resetSuggestions}" value="Reset Suggestions"/>
-    </lightning:buttonGroup>
-    <lightning:card title="Restaurants">
-        <lightning:datatable
-                keyField="id"
-                data="{!v.restaurant}"
-                columns="{!columns}"/>
-    </lightning:card>
-
+	<lightning:card title="Lunch Picker" />
+	<lightning:buttonGroup>
+		<lightning:button
+			onclick="{!resetRestaurants}"
+			value="Reset Restaurant Selection"
+		/>
+		<lightning:button onclick="{!resetDiners}" value="Reset Diners" />
+		<lightning:button onclick="{!resetSuggestions}" value="Reset Suggestions" />
+	</lightning:buttonGroup>
+	<lightning:card title="Restaurants">
+		<lightning:datatable
+			keyField="id"
+			data="{!v.restaurant}"
+			columns="{!columns}"
+		/>
+	</lightning:card>
 </aura:component>

@@ -1,5 +1,4 @@
 public class LunchPickerController {
-
 	public class DinerNotFoundException extends Exception {
 	}
 	public class RestaurantNotFoundException extends Exception {
@@ -11,20 +10,26 @@ public class LunchPickerController {
 	// that the person is neutral or likes it, which are means it's good enough to eat at.
 	// Need to gather real data for this to work, though, which is mildly inconvenient.
 
-	private static final List<Restaurant__c> ALL_RESTAURANTS =
-			LunchPickerQueryService.queryAllRestaurants();
+	private static final List<Restaurant__c> ALL_RESTAURANTS = LunchPickerQueryService.queryAllRestaurants();
 
-	public List<Restaurant__c> restaurants {get; set;}
-	public List<Restaurant__c> suggestions {get; set;}
-	public String suggestionName {get; set;}
-	public String dinerName {get; set;}
-	public String diners {get; set;}
-	public Restaurant__c decision {get; set;}
+	public List<Restaurant__c> restaurants { get; set; }
+	public List<Restaurant__c> suggestions { get; set; }
+	public String suggestionName { get; set; }
+	public String dinerName { get; set; }
+	public String diners { get; set; }
+	public Restaurant__c decision { get; set; }
 	public Boolean isFiltered;
 	private static final Id PUBLIC_CALENDAR_ID = '0231U000000Cwop';
-	private static final Id LUNCH_PICKER_ID = [SELECT Id FROM User WHERE Name LIKE 'Lunch Picker%'].Id;
-	private static final List<String> URSA_MAJOR_TEAMMATES = new List<String> {
-			'Kyle Blair', 'Wesley Springer', 'Jordan Michael'
+	private static final Id LUNCH_PICKER_ID = [
+		SELECT Id
+		FROM User
+		WHERE Name LIKE 'Lunch Picker%'
+	]
+	.Id;
+	private static final List<String> URSA_MAJOR_TEAMMATES = new List<String>{
+		'Kyle Blair',
+		'Wesley Springer',
+		'Jordan Michael'
 	};
 	private static final String FORMATTED_SEMICOLON = '; ';
 
@@ -46,10 +51,12 @@ public class LunchPickerController {
 			clearDinerName();
 		} catch (DinerNotFoundException e) {
 			e.setMessage('dInEr NoT fOuND');
-			ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.INFO, e.getMessage());
+			ApexPages.Message msg = new ApexPages.Message(
+				ApexPages.Severity.INFO,
+				e.getMessage()
+			);
 			ApexPages.addMessage(msg);
 		}
-
 	}
 
 	public void addDiner(String name) {
@@ -74,7 +81,11 @@ public class LunchPickerController {
 
 	private void queryRestaurantsByWaitTime(String waitTime) {
 		isFiltered = true;
-		LunchPickerQueryService.dynamicRestaurantQuery('Wait_Time__c', waitTime, this);
+		LunchPickerQueryService.dynamicRestaurantQuery(
+			'Wait_Time__c',
+			waitTime,
+			this
+		);
 	}
 
 	public void filterCheapRestaurants() {
@@ -98,20 +109,29 @@ public class LunchPickerController {
 		try {
 			addRestaurantSuggestion(suggestionName);
 		} catch (RestaurantNotFoundException e) {
-			e.setMessage('Restaurant not found. Please make sure you spelled the name right, ' +
-					'including special characters.');
-			ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.INFO, e.getMessage());
+			e.setMessage(
+				'Restaurant not found. Please make sure you spelled the name right, ' +
+				'including special characters.'
+			);
+			ApexPages.Message msg = new ApexPages.Message(
+				ApexPages.Severity.INFO,
+				e.getMessage()
+			);
 			ApexPages.addMessage(msg);
 		} catch (MultipleRestaurantsFoundException e) {
 			e.setMessage('Multiple restaurants found on query. Keep typin\'.');
-			ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.INFO, e.getMessage());
+			ApexPages.Message msg = new ApexPages.Message(
+				ApexPages.Severity.INFO,
+				e.getMessage()
+			);
 			ApexPages.addMessage(msg);
 		}
 	}
 
 	private void addRestaurantSuggestion(String restaurantName) {
-		List<Restaurant__c> potentialSuggestions =
-				LunchPickerQueryService.queryRestaurantsByName(restaurantName);
+		List<Restaurant__c> potentialSuggestions = LunchPickerQueryService.queryRestaurantsByName(
+			restaurantName
+		);
 		suggestionExceptionHandler(potentialSuggestions);
 		if (String.isNotBlank(suggestionName)) {
 			suggestions.add(potentialSuggestions[0]);
@@ -120,7 +140,10 @@ public class LunchPickerController {
 	}
 
 	public PageReference finalizeDecision() {
-		insert new List<Event> {createLunchPickerEvent(), createPublicCalendarEvent()};
+		insert new List<Event>{
+			createLunchPickerEvent(),
+			createPublicCalendarEvent()
+		};
 		return updateRestaurant();
 	}
 
@@ -176,13 +199,16 @@ public class LunchPickerController {
 
 	private String formatDinersForEventDescription() {
 		String formatted = '';
-		String copy = diners.removeEnd(FORMATTED_SEMICOLON).replaceAll(';', ',');
+		String copy = diners.removeEnd(FORMATTED_SEMICOLON)
+			.replaceAll(';', ',');
 		if (copy.countMatches(',') == 1) {
 			formatted = copy.replace(',', ' and');
 		} else if (copy.countMatches(',') > 1) {
 			Integer lastCommaIndex = copy.lastIndexOf(',');
-			formatted = copy.substring(0, lastCommaIndex) + ' and' +
-					copy.substring(lastCommaIndex + 1);
+			formatted =
+				copy.substring(0, lastCommaIndex) +
+				' and' +
+				copy.substring(lastCommaIndex + 1);
 		} else {
 			formatted = copy;
 		}
@@ -190,30 +216,49 @@ public class LunchPickerController {
 	}
 
 	public PageReference updateRestaurant() {
-		Restaurant__c toUpdate = [SELECT Id, Name FROM Restaurant__c WHERE Name = :decision.Name];
+		Restaurant__c toUpdate = [
+			SELECT Id, Name
+			FROM Restaurant__c
+			WHERE Name = :decision.Name
+		];
 		toUpdate.Last_Visited_Date__c = Date.today();
 		update toUpdate;
 		return new PageReference('/' + toUpdate.Id);
 	}
 
-	private void suggestionExceptionHandler(List<Restaurant__c> potentialSuggestions) {
+	private void suggestionExceptionHandler(
+		List<Restaurant__c> potentialSuggestions
+	) {
 		if (potentialSuggestions.isEmpty()) {
 			throw new RestaurantNotFoundException();
 		}
-		if (potentialSuggestions.size() > 1 && String.isNotBlank(suggestionName)) {
+		if (
+			potentialSuggestions.size() > 1 && String.isNotBlank(suggestionName)
+		) {
 			throw new MultipleRestaurantsFoundException();
 		}
 	}
 
 	public PageReference pickRestaurant() {
-
 		if (!suggestions.isEmpty()) {
-			decision.Name = suggestions.get(Math.mod((Integer)(Math.random()*100), suggestions.size())).Name;
+			decision.Name = suggestions.get(
+					Math.mod(
+						(Integer) (Math.random() * 100),
+						suggestions.size()
+					)
+				)
+				.Name;
 		} else {
 			if (!isFiltered) {
 				restaurants = LunchPickerQueryService.queryRestaurants();
 			}
-			decision.Name = restaurants.get(Math.mod((Integer)(Math.random()*100), restaurants.size())).Name;
+			decision.Name = restaurants.get(
+					Math.mod(
+						(Integer) (Math.random() * 100),
+						restaurants.size()
+					)
+				)
+				.Name;
 		}
 		return null;
 	}

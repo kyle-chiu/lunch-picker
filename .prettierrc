@@ -3,11 +3,15 @@
   "overrides": [
     {
       "files": "**/lwc/**/*.html",
-      "options": { "parser": "lwc" }
+      "options": { "parser": "lwc", "useTabs": true }
     },
     {
       "files": "*.{cmp,page,component}",
-      "options": { "parser": "html" }
+      "options": { "parser": "html", "useTabs": true}
+    },
+    {
+      "files": "*.{apex,trigger,cls}",
+      "options": { "useTabs": true, "tabWidth": 4}
     }
   ]
 }

@@ -1,6 +1,5 @@
 @IsTest
 private class LunchPickerControllerTest {
-
 	static testMethod void test_Input_ExpectedOutput() {
 		// Arrange
 

@@ -1,165 +1,242 @@
 <apex:page controller="LunchPickerController">
-    <!--At some point, include lightningStyelSheets="true". Make mobile not work.-->
+	<!--At some point, include lightningStyelSheets="true". Make mobile not work.-->
 
-    <style>
-        span {
-            text-align: center;
-            font-size: 14px;
-        }
-    </style>
+	<style>
+		span {
+			text-align: center;
+			font-size: 14px;
+		}
+	</style>
 
-    <apex:form >
-        <apex:pageBlock id="block">
-            <apex:pageBlockButtons >
-                <apex:commandButton action="{!resetRestaurants}" reRender="restaurantsTable"
-                                    value="Reset Restaurant Selection"/>
-                <apex:commandButton action="{!resetDiners}" reRender="dinersAndRestaurantsBlock"
-                                    value="Reset Diners"/>
-                <apex:commandButton action="{!resetSuggestions}" reRender="suggestionsTable"
-                                    value="Reset Suggestions"/>
-            </apex:pageBlockButtons>
-            <apex:pageBlockSection id="choice">
-                <apex:commandButton action="{!pickRestaurant}"
-                                    value="How about... {!decision.Name}?"
-                                    style="font-size:14px;"
-                                    reRender="block"/>
-                <apex:commandButton action="{!finalizeDecision}"
-                                    value="Sure" rendered="{!decision.Name != null}"
-                                    style="font-size:14px;"/>
-            </apex:pageBlockSection>
+	<apex:form>
+		<apex:pageBlock id="block">
+			<apex:pageBlockButtons>
+				<apex:commandButton
+					action="{!resetRestaurants}"
+					reRender="restaurantsTable"
+					value="Reset Restaurant Selection"
+				/>
+				<apex:commandButton
+					action="{!resetDiners}"
+					reRender="dinersAndRestaurantsBlock"
+					value="Reset Diners"
+				/>
+				<apex:commandButton
+					action="{!resetSuggestions}"
+					reRender="suggestionsTable"
+					value="Reset Suggestions"
+				/>
+			</apex:pageBlockButtons>
+			<apex:pageBlockSection id="choice">
+				<apex:commandButton
+					action="{!pickRestaurant}"
+					value="How about... {!decision.Name}?"
+					style="font-size: 14px"
+					reRender="block"
+				/>
+				<apex:commandButton
+					action="{!finalizeDecision}"
+					value="Sure"
+					rendered="{!decision.Name != null}"
+					style="font-size: 14px"
+				/>
+			</apex:pageBlockSection>
 
-            <apex:pageBlock id="dinersAndRestaurantsBlock">
-                <apex:pageMessages />
-                <apex:pageBlockSection title="Select Diners" id="selectDiners" columns="3">
-                    <apex:commandButton action="{!addDiner}" value="Chewie"
-                                        reRender="dinersAndRestaurantsBlock">
-                        <apex:param value="Kyle Chiu" assignTo="{!dinerName}"/>
-                    </apex:commandButton>
-                    <apex:commandButton action="{!addDiner}" value="'Codey'"
-                                        reRender="dinersAndRestaurantsBlock">
-                        <apex:param value="Cody Zeitler" assignTo="{!dinerName}"/>
-                    </apex:commandButton>
-                    <apex:commandButton action="{!addDiner}" value="Jordan"
-                                        reRender="dinersAndRestaurantsBlock">
-                        <apex:param value="Jordan Michael" assignTo="{!dinerName}"/>
-                    </apex:commandButton>
-                    <apex:commandButton action="{!addDiner}" value="Kyle"
-                                        reRender="dinersAndRestaurantsBlock">
-                        <apex:param value="Kyle Blair" assignTo="{!dinerName}"/>
-                    </apex:commandButton>
-                    <apex:commandButton action="{!addDiner}" value="Spencer"
-                                        reRender="dinersAndRestaurantsBlock">
-                        <apex:param value="Spencer Grande" assignTo="{!dinerName}"/>
-                    </apex:commandButton>
-                    <apex:commandButton action="{!addDiner}" value="Wesley"
-                                        reRender="dinersAndRestaurantsBlock">
-                        <apex:param value="Wesley Springer" assignTo="{!dinerName}"/>
-                    </apex:commandButton>
-                    <apex:outputText value="{!diners}"/>
-                </apex:pageBlockSection>
+			<apex:pageBlock id="dinersAndRestaurantsBlock">
+				<apex:pageMessages />
+				<apex:pageBlockSection
+					title="Select Diners"
+					id="selectDiners"
+					columns="3"
+				>
+					<apex:commandButton
+						action="{!addDiner}"
+						value="Chewie"
+						reRender="dinersAndRestaurantsBlock"
+					>
+						<apex:param value="Kyle Chiu" assignTo="{!dinerName}" />
+					</apex:commandButton>
+					<apex:commandButton
+						action="{!addDiner}"
+						value="'Codey'"
+						reRender="dinersAndRestaurantsBlock"
+					>
+						<apex:param value="Cody Zeitler" assignTo="{!dinerName}" />
+					</apex:commandButton>
+					<apex:commandButton
+						action="{!addDiner}"
+						value="Jordan"
+						reRender="dinersAndRestaurantsBlock"
+					>
+						<apex:param value="Jordan Michael" assignTo="{!dinerName}" />
+					</apex:commandButton>
+					<apex:commandButton
+						action="{!addDiner}"
+						value="Kyle"
+						reRender="dinersAndRestaurantsBlock"
+					>
+						<apex:param value="Kyle Blair" assignTo="{!dinerName}" />
+					</apex:commandButton>
+					<apex:commandButton
+						action="{!addDiner}"
+						value="Spencer"
+						reRender="dinersAndRestaurantsBlock"
+					>
+						<apex:param value="Spencer Grande" assignTo="{!dinerName}" />
+					</apex:commandButton>
+					<apex:commandButton
+						action="{!addDiner}"
+						value="Wesley"
+						reRender="dinersAndRestaurantsBlock"
+					>
+						<apex:param value="Wesley Springer" assignTo="{!dinerName}" />
+					</apex:commandButton>
+					<apex:outputText value="{!diners}" />
+				</apex:pageBlockSection>
 
-                <apex:pageBlockSection title="Make A Suggestion" id="suggestionsSection">
-                    <apex:inputText value="{!suggestionName}" label="Suggestion"/>
-                    <apex:commandButton action="{!addRestaurantSuggestion}" value="Suggest"
-                                        reRender="dinersAndRestaurantsBlock">
-                    </apex:commandButton>
-                </apex:pageBlockSection>
+				<apex:pageBlockSection
+					title="Make A Suggestion"
+					id="suggestionsSection"
+				>
+					<apex:inputText value="{!suggestionName}" label="Suggestion" />
+					<apex:commandButton
+						action="{!addRestaurantSuggestion}"
+						value="Suggest"
+						reRender="dinersAndRestaurantsBlock"
+					>
+					</apex:commandButton>
+				</apex:pageBlockSection>
 
-                <apex:pageBlockSection title="Restaurants" columns="3">
-                    <!--Blank div tags are for center formatting. Find a way to not do this-->
-                    <apex:outputPanel layout="block" style="overflow:auto;width:650px;height:247px"
-                                      id="restaurantsTable" title="Potential Eateries">
-                        <apex:dataTable value="{!restaurants}" var="restaurant" border="2"
-                                        bgColor="Goldenrod" align="center"
-                                        columnsWidth="150px,100px,50px,100px"
-                                        cellPadding="5%">
-                            <apex:column >
-                                <apex:facet name="header"><span>Name</span></apex:facet>
-                                <apex:outputLink value="/{!restaurant.Id}" target="_blank">
-                                    <span>{!restaurant.Name}</span>
-                                </apex:outputLink>
-                            </apex:column>
-                            <apex:column >
-                                <apex:facet name="header"><span>Wait Time</span></apex:facet>
-                                <span>{!restaurant.Wait_Time__c}</span>
-                            </apex:column>
-                            <apex:column >
-                                <apex:facet name="header"><span>Price</span></apex:facet>
-                                <span>{!restaurant.Price__c}</span>
-                            </apex:column>
-                            <apex:column >
-                                <apex:facet name="header"><span>Last Visited</span></apex:facet>
-                                <span><apex:outputText value="{0,date,MMM d', 'yyyy}">
-                                    <apex:param value="{!restaurant.Last_Visited_Date__c}"/>
-                                </apex:outputText></span>
-                            </apex:column>
-                            <!--<apex:column>-->
-                            <!--<apex:facet name="header"/>-->
-                            <!--<apex:outputLink-->
-                            <!--onClick="{!suggestionName = restaurant.Name}"-->
-                            <!--id="addRestaurantSuggestion">-->
-                            <!--<span>{!restaurant.Name}</span>-->
-                            <!--</apex:outputLink>-->
-                            <!--</apex:column>-->
-                        </apex:dataTable>
-                        <apex:actionFunction name="addRestaurantSuggestion"
-                                             action="{!addRestaurantSuggestion}"/>
-                    </apex:outputPanel>
-                    <apex:outputPanel >
-                        <apex:commandButton action="{!filterNonexistentWaitRestaurants}"
-                                            value="Fast Food"
-                                            style="width:100px;text-align:center;"/>
-                        <apex:commandButton action="{!filterShortWaitRestaurants}"
-                                            value="Quick Food"
-                                            style="width:100px;text-align:center;"/>
-                        <apex:commandButton action="{!filterLongWaitRestaurants}"
-                                            value="Sit-down"
-                                            style="width:100px;text-align:center;"/>
-                        <apex:commandButton action="{!filterCheapRestaurants}"
-                                            value="Cheap"
-                                            style="width:100px;text-align:center;"/>
-                        <apex:commandButton action="{!filterAverageRestaurants}"
-                                            value="Average"
-                                            style="width:100px;text-align:center;"/>
-                        <apex:commandButton action="{!filterExpensiveRestaurants}"
-                                            value="Expensive"
-                                            style="width:100px;text-align:center;"/>
-                    </apex:outputPanel>
-                    <!--TODO: User should be able to select a restaurant more easily - not have to
+				<apex:pageBlockSection title="Restaurants" columns="3">
+					<!--Blank div tags are for center formatting. Find a way to not do this-->
+					<apex:outputPanel
+						layout="block"
+						style="overflow: auto; width: 650px; height: 247px"
+						id="restaurantsTable"
+						title="Potential Eateries"
+					>
+						<apex:dataTable
+							value="{!restaurants}"
+							var="restaurant"
+							border="2"
+							bgColor="Goldenrod"
+							align="center"
+							columnsWidth="150px,100px,50px,100px"
+							cellPadding="5%"
+						>
+							<apex:column>
+								<apex:facet name="header"><span>Name</span></apex:facet>
+								<apex:outputLink value="/{!restaurant.Id}" target="_blank">
+									<span>{!restaurant.Name}</span>
+								</apex:outputLink>
+							</apex:column>
+							<apex:column>
+								<apex:facet name="header"><span>Wait Time</span></apex:facet>
+								<span>{!restaurant.Wait_Time__c}</span>
+							</apex:column>
+							<apex:column>
+								<apex:facet name="header"><span>Price</span></apex:facet>
+								<span>{!restaurant.Price__c}</span>
+							</apex:column>
+							<apex:column>
+								<apex:facet name="header"><span>Last Visited</span></apex:facet>
+								<span
+									><apex:outputText value="{0,date,MMM d', 'yyyy}">
+										<apex:param
+											value="{!restaurant.Last_Visited_Date__c}"
+										/> </apex:outputText
+								></span>
+							</apex:column>
+							<!--<apex:column>-->
+							<!--<apex:facet name="header"/>-->
+							<!--<apex:outputLink-->
+							<!--onClick="{!suggestionName = restaurant.Name}"-->
+							<!--id="addRestaurantSuggestion">-->
+							<!--<span>{!restaurant.Name}</span>-->
+							<!--</apex:outputLink>-->
+							<!--</apex:column>-->
+						</apex:dataTable>
+						<apex:actionFunction
+							name="addRestaurantSuggestion"
+							action="{!addRestaurantSuggestion}"
+						/>
+					</apex:outputPanel>
+					<apex:outputPanel>
+						<apex:commandButton
+							action="{!filterNonexistentWaitRestaurants}"
+							value="Fast Food"
+							style="width: 100px; text-align: center"
+						/>
+						<apex:commandButton
+							action="{!filterShortWaitRestaurants}"
+							value="Quick Food"
+							style="width: 100px; text-align: center"
+						/>
+						<apex:commandButton
+							action="{!filterLongWaitRestaurants}"
+							value="Sit-down"
+							style="width: 100px; text-align: center"
+						/>
+						<apex:commandButton
+							action="{!filterCheapRestaurants}"
+							value="Cheap"
+							style="width: 100px; text-align: center"
+						/>
+						<apex:commandButton
+							action="{!filterAverageRestaurants}"
+							value="Average"
+							style="width: 100px; text-align: center"
+						/>
+						<apex:commandButton
+							action="{!filterExpensiveRestaurants}"
+							value="Expensive"
+							style="width: 100px; text-align: center"
+						/>
+					</apex:outputPanel>
+					<!--TODO: User should be able to select a restaurant more easily - not have to
                     type the name out perfectly every time.-->
-                    <apex:outputPanel layout="block" style="overflow:auto;width:600px;height:247px"
-                                      id="suggestionsTable" title="Suggestions">
-                        <apex:dataTable value="{!suggestions}" var="suggestion" border="2"
-                                        bgColor="Yellow" align="center"
-                                        columnsWidth="150px,100px,50px"
-                                        cellPadding="5%">
-                            <apex:column >
-                                <apex:facet name="header"><span>Name</span></apex:facet>
-                                <apex:outputLink value="/{!suggestion.Id}" target="_blank">
-                                    <span>{!suggestion.Name}</span>
-                                </apex:outputLink>
-                            </apex:column>
-                            <apex:column >
-                                <apex:facet name="header"><span>Wait Time</span></apex:facet>
-                                <span>{!suggestion.Wait_Time__c}</span>
-                            </apex:column>
-                            <apex:column >
-                                <apex:facet name="header"><span>Price</span></apex:facet>
-                                <span>{!suggestion.Price__c}</span>
-                            </apex:column>
-                            <apex:column >
-                                <apex:facet name="header"><span>Last Visited</span></apex:facet>
-                                <span><apex:outputText value="{0,date,MMM d', 'yyyy}">
-                                    <apex:param value="{!suggestion.Last_Visited_Date__c}"/>
-                                </apex:outputText></span>
-                            </apex:column>
-                        </apex:dataTable>
-                    </apex:outputPanel>
-
-                </apex:pageBlockSection>
-            </apex:pageBlock>
-        </apex:pageBlock>
-
-    </apex:form>
-
+					<apex:outputPanel
+						layout="block"
+						style="overflow: auto; width: 600px; height: 247px"
+						id="suggestionsTable"
+						title="Suggestions"
+					>
+						<apex:dataTable
+							value="{!suggestions}"
+							var="suggestion"
+							border="2"
+							bgColor="Yellow"
+							align="center"
+							columnsWidth="150px,100px,50px"
+							cellPadding="5%"
+						>
+							<apex:column>
+								<apex:facet name="header"><span>Name</span></apex:facet>
+								<apex:outputLink value="/{!suggestion.Id}" target="_blank">
+									<span>{!suggestion.Name}</span>
+								</apex:outputLink>
+							</apex:column>
+							<apex:column>
+								<apex:facet name="header"><span>Wait Time</span></apex:facet>
+								<span>{!suggestion.Wait_Time__c}</span>
+							</apex:column>
+							<apex:column>
+								<apex:facet name="header"><span>Price</span></apex:facet>
+								<span>{!suggestion.Price__c}</span>
+							</apex:column>
+							<apex:column>
+								<apex:facet name="header"><span>Last Visited</span></apex:facet>
+								<span
+									><apex:outputText value="{0,date,MMM d', 'yyyy}">
+										<apex:param
+											value="{!suggestion.Last_Visited_Date__c}"
+										/> </apex:outputText
+								></span>
+							</apex:column>
+						</apex:dataTable>
+					</apex:outputPanel>
+				</apex:pageBlockSection>
+			</apex:pageBlock>
+		</apex:pageBlock>
+	</apex:form>
 </apex:page>
