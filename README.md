@@ -25,6 +25,8 @@ start from scratch
 keep old data to hold preferred restaurants and such
 
 documenu api for restaurant data
+   figure out how to get this working
+      documenu-npm library in lwc
 LunchPicker app
    LunchPicker LWC
       table with restaurant data
