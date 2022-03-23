@@ -18,3 +18,19 @@ write some gd tests
    c. redo 'suggestion's - additive, rather than either/or
    d. update filtering (match data model enhancement)
 9. maybe google maps integration if it's free
+
+# ======================================================
+start from scratch
+
+keep old data to hold preferred restaurants and such
+
+documenu api for restaurant data
+LunchPicker app
+   LunchPicker LWC
+      table with restaurant data
+         clicking restaurant name / button in table adds restaurant to pool to be selected
+      sort by:
+         location (allows state, zip, geo, geobox, distance from)
+         preferred
+         cost
+   Calendar records restaurants visited, time, date, who went
