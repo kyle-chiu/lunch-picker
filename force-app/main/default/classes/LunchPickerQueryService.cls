@@ -16,7 +16,7 @@ public with sharing class LunchPickerQueryService {
 	private static String query = '';
 
 	// TODO: Move everything to another class and un-staticify the rest of the methods.
-	@AuraEnabled
+	@AuraEnabled(cacheable=true)
 	public static List<Restaurant__c> queryAllRestaurants() {
 		query = QUERY_BASE + ' WHERE' + QUERY_NOT_CLOSED + QUERY_ORDER;
 		return Database.query(query);

@@ -36,3 +36,5 @@ LunchPicker app
          preferred
          cost
    Calendar records restaurants visited, time, date, who went
+
+try using LMS Channels to render a record on some display component that's chosen on a datatable
