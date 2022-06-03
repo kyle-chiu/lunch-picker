@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>RestaurantSelectionChannel</masterLabel>
+    <isExposed>true</isExposed>
+    <description>Channel to communicate a selected restaurant from the display table to the display.</description>
+    <lightningMessageFields>
+        <fieldName>recordId</fieldName>
+        <description>The id of the selected restaurant.</description>
+    </lightningMessageFields>
+</LightningMessageChannel>

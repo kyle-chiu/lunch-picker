@@ -1,6 +1,6 @@
 import { LightningElement, wire } from "lwc";
-import { publish, messageContext } from "lightning/messageService";
-// TODO: Add lightning message service channel
+import { publish, MessageContext } from "lightning/messageService";
+import RESTAURANT_SELECTION_CHANNEL from "@salesforce/messageChannel/RestaurantSelectionChannel__c";
 
 // TODO: Replace these with data from an API
 import NAME from "@salesforce/schema/Restaurant__c.Name";
@@ -11,14 +11,15 @@ import queryAllRestaurants from "@salesforce/apex/LunchPickerQueryService.queryA
 
 export default class RestaurantDisplayTable extends LightningElement {
   columns = [
-    { label: "Name", type: "button", typeAttributes: { label: { fieldName: NAME.fieldApiName, value: "Id" }, variant: "base" } },
+    { label: "Name", type: "button", typeAttributes: { label: { fieldName: NAME.fieldApiName}, value: "Id", variant: "base" } },
     { label: "Wait Time", fieldName: WAIT_TIME.fieldApiName },
     { label: "Price", fieldName: PRICE.fieldApiName },
-    { label: "Last Visited", fieldName: LAST_VISITED_DATE.fieldApiName, type: "date" },
+    { label: "Last Visited", fieldName: LAST_VISITED_DATE.fieldApiName, type: "date" }
   ];
 
+  @wire(MessageContext)
+  messageContext;
   data = [];
-  currentRecordId;
 
   // TODO: Figure out how to get @wire to work?
   async connectedCallback() {
@@ -26,7 +27,9 @@ export default class RestaurantDisplayTable extends LightningElement {
   }
 
   selectRecord(event) {
-    this.currentRecordId = event.detail.row.Id;
-    console.log(this.currentRecordId);
+    const payload = { recordId: event.detail.row.Id };
+    console.log('selectRecord');
+    publish(this.messageContext, RESTAURANT_SELECTION_CHANNEL, payload);
+    console.log('publishing');
   }
 }

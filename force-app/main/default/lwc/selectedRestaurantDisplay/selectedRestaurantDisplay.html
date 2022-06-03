@@ -1,3 +1,14 @@
 <template>
-    
+	<lightning-card if:true={recordId}>
+		<lightning-record-form
+			record-id={recordId}
+			object-api-name="Restaurant__c"
+            fields={fields}
+		>
+			<!-- <lightning-output-field field-name="Name"></lightning-output-field> -->
+			<!-- <lightning-output-field field-name="Price__c"></lightning-output-field> -->
+			<!-- <lightning-output-field field-name="Last_Visited_Date__c" ></lightning-output-field> -->
+			<!-- <lightning-output-field field-name="Wait_Time__c" ></lightning-output-field> -->
+		</lightning-record-form>
+	</lightning-card>
 </template>

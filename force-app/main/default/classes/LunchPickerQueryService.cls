@@ -68,7 +68,7 @@ public with sharing class LunchPickerQueryService {
 	public static void dynamicRestaurantQuery(
 		String fieldApiName,
 		String fieldValue,
-		LunchPickerController controlle
+		LunchPickerController controller
 	) {
 		String names = controller.diners.removeEnd(';');
 		query =
